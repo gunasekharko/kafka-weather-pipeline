@@ -14,7 +14,9 @@ logging.basicConfig(
 
 cities=["Tokyo", "London", "NewYork", "Sydney", "Mumbai"]
 
-producer=Producer({'bootstrap.servers':'localhost:9092'})
+producer=Producer({'bootstrap.servers':'localhost:9092','enable.idempotence':True,'acks':'all','retries':5,
+'max.in.flight.requests.per.connection':5
+})
 
 topic='weather-events'
 
