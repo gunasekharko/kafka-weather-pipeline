@@ -13,8 +13,9 @@ logging.basicConfig(
 
 conf = {
     'bootstrap.servers':'localhost:9092',
-    'group.id':'weather-readers',
-    'auto.offset.reset':'earliest'
+    'group.id':'weather-readers-v2',
+    'auto.offset.reset':'earliest',
+    'enable.auto.commit':False
 }
 consumer=Consumer(conf)
 
@@ -44,7 +45,16 @@ try:
         value=json.loads(msg.value().decode('utf-8'))
         partition=msg.partition()
 
-        print(f"Partition: [{partition}] | Key: {key} | Value: {value}")
+        print(f"Partition: [{partition}] | Offset: {msg.offset()} | Key: {key} | Value: {value}")
+        # Optional: Uncomment line below to test At-Least-Once delivery & crash recovery
+        # if msg.offset() == 5: raise Exception("simulated crash before commit!")
+        
+        try:
+            consumer.commit(message=msg, asynchronous=False)
+            print(f"successfully committed offset:{msg.offset()}")
+
+        except Exception as e:
+            print(f"Commit failed:{e}")
 
 except KeyboardInterrupt:
     logging.info("Keyboard interrupt received. Shutting down...")
