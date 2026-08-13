@@ -1,0 +1,19 @@
+{
+    "type": "record",
+    "namespace": "com.kafka.learning",
+    "name": "user_event",
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "string"
+        },
+        {
+            "name":"event_type",
+            "type":"string"
+        },
+        {
+            "name":"timestamp",
+            "type":"long"
+        }
+    ]
+}
