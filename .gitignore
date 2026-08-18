@@ -12,3 +12,6 @@ ENV/
 KAFKA_30_DAY_ROADMAP.md
 learning.md
 README.md
+
+# Quix Streams State Store
+**/state/
