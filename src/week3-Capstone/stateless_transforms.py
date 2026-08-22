@@ -59,6 +59,6 @@ sdf = sdf.update(lambda v: print(f"ALERT: HIGH VALUE TX: {v}"))
 sdf = sdf.to_topic(topic=flagged_topic)
 
 if __name__=="__main__":
-    app.run(sdf)  # single linear chain — no branching ambiguity
+    app.run(sdf)  
 
 
